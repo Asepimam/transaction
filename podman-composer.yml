@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  db_service:
+    image: postgres:15-alpine
+    container_name: db_service
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB_SERVICE}
+      POSTGRES_USER: ${POSTGRES_USER_SERVICE}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_SERVICE}
+    ports:
+      - "5432:5432"
+    volumes:
+      - service_data:/var/lib/postgresql/data
+    networks:
+      - transaction_net
+
+volumes:
+  service_data:
+
+networks:
+  transaction_net:
+    driver: bridge
