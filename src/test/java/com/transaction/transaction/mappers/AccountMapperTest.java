@@ -36,6 +36,9 @@ class AccountMapperTest {
         account.setBalance(1000.0);
     }
 
+    // mvn test -Dtest=AccountMapperTest#testToResponseAccountDto
+    // Test: map Account entity to ResponseAccountDto
+    // Expected: All fields correctly mapped (userId, userName, balance)
     @Test
     void testToResponseAccountDto() {
         // Act
@@ -48,6 +51,9 @@ class AccountMapperTest {
         assertEquals(1000.0, result.getBalance());
     }
 
+    // mvn test -Dtest=AccountMapperTest#testToResponseAccountDtoWithDifferentUsers
+    // Test: map Account with different users and balances
+    // Expected: Correct mapping for all user/balance combinations
     @ParameterizedTest(name = "User {0} with userId {1} and balance {2}")
     @CsvSource({
         "John Doe, 1, 1000.0",
@@ -71,6 +77,9 @@ class AccountMapperTest {
         assertEquals(balance, result.getBalance());
     }
 
+    // mvn test -Dtest=AccountMapperTest#testToResponseAccountBalanceDtoWithVariousBalances
+    // Test: map Account to ResponseAccountBalanceDto with different balance values
+    // Expected: Correct mapping including userId and various balance amounts
     @ParameterizedTest(name = "Balance {0}")
     @CsvSource({
         "0.0",

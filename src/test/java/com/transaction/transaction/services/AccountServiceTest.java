@@ -70,6 +70,9 @@ class AccountServiceTest {
         updateBalanceDto.setBalance(1000.0);
     }
 
+    // mvn test -Dtest=AccountServiceTest#testCreateAccountSuccess
+    // Test: successful account creation with valid user data
+    // Expected: Account created with initial balance 0.0, User and Account saved
     @Test
     void testCreateAccountSuccess() {
         // Arrange
@@ -93,6 +96,9 @@ class AccountServiceTest {
         verify(accountRepository, times(1)).save(any(Account.class));
     }
 
+    // mvn test -Dtest=AccountServiceTest#testCreateAccountWithDifferentUserNames
+    // Test: account creation with different user names
+    // Expected: Account successfully created for each provided user name
     @ParameterizedTest(name = "Create account for {0}")
     @CsvSource({
         "John Doe",
@@ -124,6 +130,9 @@ class AccountServiceTest {
         assertEquals(0.0, result.getBalance());
     }
 
+    // mvn test -Dtest=AccountServiceTest#testCreateAccountInitialBalanceIsZero
+    // Test: initial balance is always zero when creating account
+    // Expected: All new accounts should have 0.0 balance
     @Test
     void testCreateAccountInitialBalanceIsZero() {
         // Arrange
@@ -141,6 +150,9 @@ class AccountServiceTest {
         assertEquals(0.0, result.getBalance());
     }
 
+    // mvn test -Dtest=AccountServiceTest#testGetBalanceWithVariousAmounts
+    // Test: retrieve account balance with different balance values
+    // Expected: Correct balance returned for different users and amounts
     @ParameterizedTest(name = "Get balance with {0}")
     @CsvSource({
         "10, 500.0",
@@ -170,6 +182,9 @@ class AccountServiceTest {
         assertEquals(balance, result.getBalance());
     }
 
+    // mvn test -Dtest=AccountServiceTest#testGetBalanceUserNotFound
+    // Test: retrieve balance for non-existent user
+    // Expected: ResourceNotFoundException thrown with "Account not found" message
     @Test
     void testGetBalanceUserNotFound() {
         // Arrange
@@ -183,6 +198,9 @@ class AccountServiceTest {
         assertEquals("Account not found", exception.getMessage());
     }
 
+    // mvn test -Dtest=AccountServiceTest#testUpdateBalanceWithVariousAmounts
+    // Test: update account balance with different values (positive, negative, zero, decimal)
+    // Expected: Balance updated correctly for all test cases
     @ParameterizedTest(name = "Update balance to {0}")
     @ValueSource(doubles = {0.0, 100.0, 500.0, 1000.0, 123.456, -500.0, 999999.99})
     void testUpdateBalanceWithVariousAmounts(double newBalance) {
@@ -199,6 +217,9 @@ class AccountServiceTest {
         verify(accountRepository, times(1)).save(account);
     }
 
+    // mvn test -Dtest=AccountServiceTest#testUpdateBalanceUserNotFound
+    // Test: update balance for non-existent user
+    // Expected: ResourceNotFoundException thrown with "Account not found" message
     @Test
     void testUpdateBalanceUserNotFound() {
         // Arrange
@@ -214,6 +235,9 @@ class AccountServiceTest {
         verify(accountRepository, times(0)).save(any(Account.class));
     }
 
+    // mvn test -Dtest=AccountServiceTest#testUpdateBalanceMultipleTimes
+    // Test: update balance multiple times consecutively
+    // Expected: Each update replaces the previous balance value
     @Test
     void testUpdateBalanceMultipleTimes() {
         // Arrange
@@ -239,6 +263,9 @@ class AccountServiceTest {
         verify(accountRepository, times(3)).save(account);
     }
 
+    // mvn test -Dtest=AccountServiceTest#testCreateAccountVerifyUserSavedFirst
+    // Test: verify that User is saved before Account during account creation
+    // Expected: User saved, then Account saved with valid user reference
     @Test
     void testCreateAccountVerifyUserSavedFirst() {
         // Arrange

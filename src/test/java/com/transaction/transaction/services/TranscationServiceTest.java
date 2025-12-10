@@ -96,6 +96,9 @@ class TransactionServiceTest {
         responseTransactionDTO2.setDate(LocalDateTime.of(2025, 12, 9, 15, 30));
     }
 
+    // mvn test -Dtest=TransactionServiceTest#testGetHistoryTransactionSuccess
+    // Test: retrieve transaction history for account with multiple transactions
+    // Expected: All transactions returned in correct format and order
     @Test
     void testGetHistoryTransactionSuccess() {
         // Arrange
@@ -127,6 +130,9 @@ class TransactionServiceTest {
         assertEquals("credit", result.getTransactions().get(1).getType());
     }
 
+    // mvn test -Dtest=TransactionServiceTest#testGetHistoryTransactionWithEmptyResult
+    // Test: retrieve transaction history for account with no transactions
+    // Expected: Empty transaction list returned for the account
     @Test
     void testGetHistoryTransactionWithEmptyResult() {
         // Arrange
@@ -148,6 +154,9 @@ class TransactionServiceTest {
         assertEquals(0, result.getTransactions().size());
     }
 
+    // mvn test -Dtest=TransactionServiceTest#testGetHistoryTransactionWithPagination
+    // Test: retrieve transaction history with different pagination parameters
+    // Expected: Correct pagination applied (page 0-2, size 5-20)
     @ParameterizedTest(name = "Pagination: page={0}, size={1}")
     @CsvSource({
         "0, 5",
@@ -176,6 +185,9 @@ class TransactionServiceTest {
         assertEquals(1L, result.getTransactions().get(0).getId());
     }
 
+    // mvn test -Dtest=TransactionServiceTest#testGetHistoryTransactionVerifyTransactionDetails
+    // Test: verify all transaction fields are correctly mapped from entity to DTO
+    // Expected: All fields (id, accountId, amount, type, category, status, description, date) correctly set
     @Test
     void testGetHistoryTransactionVerifyTransactionDetails() {
         // Arrange

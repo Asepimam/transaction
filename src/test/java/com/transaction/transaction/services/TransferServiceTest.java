@@ -107,6 +107,9 @@ class TransferServiceTest {
         creditTransaction.setStatus("success");
     }
 
+    // mvn test -Dtest=TransferServiceTest#testCreateTransferSuccess
+    // Test: successful money transfer between two accounts
+    // Expected: Debit from source account, credit to destination account, transfer and transactions recorded
     @Test
     void testCreateTransferSuccess() {
         // Arrange
@@ -140,6 +143,9 @@ class TransferServiceTest {
         verify(transactionRepository, times(2)).save(any(Transaction.class));
     }
 
+    // mvn test -Dtest=TransferServiceTest#testCreateTransferFromAccountNotFound
+    // Test: transfer from non-existent account
+    // Expected: ResourceNotFoundException thrown with "From account not found" message
     @Test
     void testCreateTransferFromAccountNotFound() {
         // Arrange
@@ -156,6 +162,9 @@ class TransferServiceTest {
         verify(transactionRepository, never()).save(any(Transaction.class));
     }
 
+    // mvn test -Dtest=TransferServiceTest#testCreateTransferToAccountNotFound
+    // Test: transfer to non-existent account
+    // Expected: ResourceNotFoundException thrown with "To account not found" message
     @Test
     void testCreateTransferToAccountNotFound() {
         // Arrange
@@ -173,6 +182,9 @@ class TransferServiceTest {
         verify(transactionRepository, never()).save(any(Transaction.class));
     }
 
+    // mvn test -Dtest=TransferServiceTest#testCreateTransferWithNegativeAmount
+    // Test: transfer with negative amount
+    // Expected: IllegalArgumentException thrown
     @Test
     void testCreateTransferWithNegativeAmount() {
         // Arrange
@@ -190,6 +202,9 @@ class TransferServiceTest {
         verify(transferRepository, never()).save(any(Transfer.class));
     }
 
+    // mvn test -Dtest=TransferServiceTest#testCreateTransferWithZeroAmount
+    // Test: transfer with zero amount
+    // Expected: IllegalArgumentException thrown
     @Test
     void testCreateTransferWithZeroAmount() {
         // Arrange
@@ -207,6 +222,9 @@ class TransferServiceTest {
         verify(transferRepository, never()).save(any(Transfer.class));
     }
 
+    // mvn test -Dtest=TransferServiceTest#testCreateTransferToSameAccount
+    // Test: transfer to the same account
+    // Expected: IllegalArgumentException thrown - cannot transfer to same account
     @Test
     void testCreateTransferToSameAccount() {
         // Arrange
@@ -227,6 +245,9 @@ class TransferServiceTest {
         verify(transferRepository, never()).save(any(Transfer.class));
     }
 
+    // mvn test -Dtest=TransferServiceTest#testCreateTransferInsufficientBalance
+    // Test: transfer with amount greater than source balance
+    // Expected: IllegalArgumentException thrown - insufficient balance
     @Test
     void testCreateTransferInsufficientBalance() {
         // Arrange
@@ -247,6 +268,9 @@ class TransferServiceTest {
         verify(transactionRepository, never()).save(any(Transaction.class));
     }
 
+    // mvn test -Dtest=TransferServiceTest#testCreateTransferExactBalance
+    // Test: transfer amount equal to entire source balance
+    // Expected: Transfer succeeds, source balance becomes 0.0, destination balance increased
     @Test
     void testCreateTransferExactBalance() {
         // Arrange
@@ -281,6 +305,9 @@ class TransferServiceTest {
         verify(transferRepository, times(1)).save(any(Transfer.class));
     }
 
+    // mvn test -Dtest=TransferServiceTest#testCreateTransferVerifyBalanceUpdate
+    // Test: verify balance changes are correctly applied to both accounts
+    // Expected: Source balance decreased, destination balance increased by transfer amount
     @Test
     void testCreateTransferVerifyBalanceUpdate() {
         // Arrange
@@ -314,6 +341,9 @@ class TransferServiceTest {
         assertEquals(initialToBalance + transferAmount, toAccount.getBalance());
     }
 
+    // mvn test -Dtest=TransferServiceTest#testCreateTransferVerifyTransactionRecords
+    // Test: verify debit and credit transactions are recorded for transfer
+    // Expected: Two transactions created (one debit for source, one credit for destination)
     @Test
     void testCreateTransferVerifyTransactionRecords() {
         // Arrange
