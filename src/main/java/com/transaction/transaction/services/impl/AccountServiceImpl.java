@@ -11,7 +11,6 @@ import com.transaction.transaction.dto.UpdateBalanceDto;
 import com.transaction.transaction.entities.Account;
 import com.transaction.transaction.entities.User;
 import com.transaction.transaction.exceptions.ResouceNotFoundException;
-import com.transaction.transaction.mappers.AccountMapper;
 import com.transaction.transaction.repositories.AccountRepository;
 import com.transaction.transaction.repositories.UserRepository;
 import com.transaction.transaction.services.AccountService;
@@ -20,12 +19,10 @@ import com.transaction.transaction.services.AccountService;
 @Service
 public class AccountServiceImpl implements AccountService {
     private final AccountRepository accountRepository;
-    private final AccountMapper accountMapper;
     private final UserRepository userRepository;
 
-    public AccountServiceImpl(AccountRepository accountRepository, AccountMapper accountMapper, UserRepository userRepository) {
+    public AccountServiceImpl(AccountRepository accountRepository, UserRepository userRepository) {
         this.accountRepository = accountRepository;
-        this.accountMapper = accountMapper;
         this.userRepository = userRepository;
         
     }
