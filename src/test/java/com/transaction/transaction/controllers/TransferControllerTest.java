@@ -44,6 +44,9 @@ class TransferControllerTest {
         objectMapper = new ObjectMapper();
     }
     
+    // mvn test -Dtest=TransferControllerTest#testCreateTransferSuccess
+    // Test: create transfer with valid data
+    // Expected: HTTP 201, correct transfer response
     // test create transfer success
     @Test
     void testCreateTransferSuccess() throws Exception {
@@ -68,6 +71,9 @@ class TransferControllerTest {
                 .andExpect(jsonPath("$.status").value("success"));
     }
 
+    // mvn test -Dtest=TransferControllerTest#testCreateTransferWithNullFromAccountId
+    // Test: create transfer with null fromAccountId
+    // Expected: HTTP 400 Bad Request
     // test create transfer with null from account id
     @Test
     void testCreateTransferWithNullFromAccountId() throws Exception {
@@ -84,6 +90,9 @@ class TransferControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
+    // mvn test -Dtest=TransferControllerTest#testCreateTransferWithNullToAccountId
+    // Test: create transfer with null toAccountId
+    // Expected: HTTP 400 Bad Request
     // test create transfer with null to account id
     @Test
     void testCreateTransferWithNullToAccountId() throws Exception {
@@ -100,6 +109,9 @@ class TransferControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
+    // mvn test -Dtest=TransferControllerTest#testCreateTransferWithNullAmount
+    // Test: create transfer with null amount
+    // Expected: HTTP 400 Bad Request
     // test create transfer with null amount
     @Test
     void testCreateTransferWithNullAmount() throws Exception {
@@ -116,6 +128,9 @@ class TransferControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
+    // mvn test -Dtest=TransferControllerTest#testCreateTransferFromAccountNotFound
+    // Test: create transfer from non-existent fromAccountId
+    // Expected: HTTP 404 Not Found
     // test create transfer from account not found
     @Test
     void testCreateTransferFromAccountNotFound() throws Exception {
@@ -135,6 +150,9 @@ class TransferControllerTest {
                 .andExpect(status().isNotFound());
     }
 
+    // mvn test -Dtest=TransferControllerTest#testCreateTransferToAccountNotFound
+    // Test: create transfer to non-existent toAccountId
+    // Expected: HTTP 404 Not Found
     // test create transfer to account not found
     @Test
     void testCreateTransferToAccountNotFound() throws Exception {
@@ -154,6 +172,9 @@ class TransferControllerTest {
                 .andExpect(status().isNotFound());
     }
 
+    // mvn test -Dtest=TransferControllerTest#testCreateTransferInsufficientBalance
+    // Test: create transfer with insufficient balance
+    // Expected: HTTP 400 Bad Request
     // test create transfer with insufficient balance
     @Test
     void testCreateTransferInsufficientBalance() throws Exception {
@@ -173,6 +194,9 @@ class TransferControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
+    // mvn test -Dtest=TransferControllerTest#testCreateTransferNegativeAmount
+    // Test: create transfer with negative amount
+    // Expected: HTTP 400 Bad Request
     // test create transfer to same account
     @Test
     void testCreateTransferNegativeAmount() throws Exception {
@@ -192,6 +216,9 @@ class TransferControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
+    // mvn test -Dtest=TransferControllerTest#testCreateTransferToSameAccount
+    // Test: create transfer to same account
+    // Expected: HTTP 400 Bad Request
     // test create transfer to same account
     @Test
     void testCreateTransferToSameAccount() throws Exception {
@@ -211,6 +238,9 @@ class TransferControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
+    // mvn test -Dtest=TransferControllerTest#testCreateTransferWithInvalidJson
+    // Test: create transfer with invalid JSON body
+    // Expected: HTTP 400 Bad Request
     // test create transfer with invalid json format
     @Test
     void testCreateTransferWithInvalidJson() throws Exception {
@@ -224,6 +254,9 @@ class TransferControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
+    // mvn test -Dtest=TransferControllerTest#testCreateTransferWithEmptyBody
+    // Test: create transfer with empty request body
+    // Expected: HTTP 400 Bad Request
     //test create transfer with empty body 
     @Test
     void testCreateTransferWithEmptyBody() throws Exception {
@@ -234,6 +267,9 @@ class TransferControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
+    // mvn test -Dtest=TransferControllerTest#testCreateTransferReturnsCorrectResponseStructure
+    // Test: create transfer and verify response structure
+    // Expected: Response contains transferId, fromAccountId, toAccountId, amount
     // test create transfer returns correct response structure
     @Test
     void testCreateTransferReturnsCorrectResponseStructure() throws Exception {
@@ -261,6 +297,9 @@ class TransferControllerTest {
                 .andExpect(jsonPath("$.status").value("success"));
     }
 
+    // mvn test -Dtest=TransferControllerTest#testCreateTransferWithLargeAmount
+    // Test: create transfer with large amount
+    // Expected: HTTP 201, correct handling of large amount
     // test create transfer with large amount
     @Test
     void testCreateTransferWithLargeAmount() throws Exception {

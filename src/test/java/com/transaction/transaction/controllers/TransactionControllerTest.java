@@ -42,6 +42,9 @@ class TransactionControllerTest {
                 .build();
     }
 
+    // mvn test -Dtest=TransactionControllerTest#testGetHistoryTransactionSuccess
+    // Test: get transaction history for valid accountId
+    // Expected: HTTP 200, correct transaction list
     // tests successful get history transaction
     @Test
     void testGetHistoryTransactionSuccess() throws Exception {
@@ -96,6 +99,9 @@ class TransactionControllerTest {
                 .andExpect(jsonPath("$.transactions[1].type").value("credit"));
     }
 
+    // mvn test -Dtest=TransactionControllerTest#testGetHistoryTransactionWithDefaultPagination
+    // Test: get transaction history with default pagination
+    // Expected: HTTP 200, default page size and number
     // test get history transaction with default pagination
     @Test
     void testGetHistoryTransactionWithDefaultPagination() throws Exception {
@@ -119,6 +125,9 @@ class TransactionControllerTest {
                 .andExpect(jsonPath("$.transactions").isArray());
     }
     
+    // mvn test -Dtest=TransactionControllerTest#testGetHistoryTransactionWithEmptyResult
+    // Test: get transaction history for account with no transactions
+    // Expected: HTTP 200, empty list
     // tests get history transaction with empty result
     @Test
     void testGetHistoryTransactionWithEmptyResult() throws Exception {
@@ -145,6 +154,9 @@ class TransactionControllerTest {
                 .andExpect(jsonPath("$.transactions.length()").value(0));
     }
 
+    // mvn test -Dtest=TransactionControllerTest#testGetHistoryTransactionWithCustomPagination
+    // Test: get transaction history with custom pagination
+    // Expected: HTTP 200, correct page size and number
     // test get history transaction with custom pagination
     @Test
     void testGetHistoryTransactionWithCustomPagination() throws Exception {
@@ -179,6 +191,9 @@ class TransactionControllerTest {
                 .andExpect(jsonPath("$.transactions.length()").value(1));
     }
 
+    // mvn test -Dtest=TransactionControllerTest#testGetHistoryTransactionWithInvalidAccountId
+    // Test: get transaction history with invalid accountId
+    // Expected: HTTP 400 Bad Request
     // test get history transaction with invalid account id
     @Test
     void testGetHistoryTransactionWithInvalidAccountId() throws Exception {
@@ -188,6 +203,9 @@ class TransactionControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
+    // mvn test -Dtest=TransactionControllerTest#testGetHistoryTransactionWithoutAccountId
+    // Test: get transaction history without accountId
+    // Expected: HTTP 400 Bad Request
     // test get history transaction without account id
     @Test
     void testGetHistoryTransactionWithoutAccountId() throws Exception {
@@ -196,6 +214,9 @@ class TransactionControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
+    // mvn test -Dtest=TransactionControllerTest#testGetHistoryTransactionVerifyResponseStructure
+    // Test: verify response structure for transaction history
+    // Expected: Response contains accountId, transactions, pagination info
     // test get history transaction verifies response structure
     @Test
     void testGetHistoryTransactionVerifyResponseStructure() throws Exception {
@@ -237,6 +258,9 @@ class TransactionControllerTest {
                 .andExpect(jsonPath("$.transactions[0].status").exists());
     }
 
+    // mvn test -Dtest=TransactionControllerTest#testGetHistoryTransactionWithLargePage
+    // Test: get transaction history with large page size
+    // Expected: HTTP 200, correct handling of large page
     // test get history transaction with large page number
     @Test
     void testGetHistoryTransactionWithLargePage() throws Exception {

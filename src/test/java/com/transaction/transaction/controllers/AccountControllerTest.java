@@ -48,6 +48,9 @@ class AccountControllerTest {
     }
 
     // Tests for /create-account endpoint
+    // mvn test -Dtest=AccountControllerTest#testCreateAccountSuccess
+    // Test: create account via controller with valid user name
+    // Expected: HTTP 201, correct response body
     @Test
     void testCreateAccountSuccess() throws Exception {
         // Arrange
@@ -73,6 +76,9 @@ class AccountControllerTest {
     }
 
     // tests create account with empty username
+    // mvn test -Dtest=AccountControllerTest#testCreateAccountWithEmptyUserName
+    // Test: create account with empty user name
+    // Expected: HTTP 400 Bad Request
     @Test
     void testCreateAccountWithEmptyUserName() throws Exception {
         // Arrange
@@ -87,6 +93,9 @@ class AccountControllerTest {
     }
 
     // tests  successful get balance
+    // mvn test -Dtest=AccountControllerTest#testGetBalanceSuccess
+    // Test: get account balance for valid userId
+    // Expected: HTTP 200, correct balance in response
     @Test
     void testGetBalanceSuccess() throws Exception {
         // Arrange
@@ -107,6 +116,9 @@ class AccountControllerTest {
     }
 
     // tests user not found when getting balance
+    // mvn test -Dtest=AccountControllerTest#testGetBalanceUserNotFound
+    // Test: get balance for non-existent userId
+    // Expected: HTTP 404 Not Found
     @Test
     void testGetBalanceUserNotFound() throws Exception {
         // Arrange
@@ -122,6 +134,9 @@ class AccountControllerTest {
     }
 
     // tests get balance with invalid user id format
+    // mvn test -Dtest=AccountControllerTest#testGetBalanceWithInvalidUserId
+    // Test: get balance with invalid userId format
+    // Expected: HTTP 400 Bad Request
     @Test
     void testGetBalanceWithInvalidUserId() throws Exception {
         // Act & Assert
@@ -131,6 +146,9 @@ class AccountControllerTest {
     }
 
     // tests get balance without user id
+    // mvn test -Dtest=AccountControllerTest#testGetBalanceWithoutUserId
+    // Test: get balance without providing userId
+    // Expected: HTTP 400 Bad Request
     @Test
     void testGetBalanceWithoutUserId() throws Exception {
         // Act & Assert
@@ -139,6 +157,9 @@ class AccountControllerTest {
     }
 
     // tests create account returns correct response structure
+    // mvn test -Dtest=AccountControllerTest#testCreateAccountReturnsCorrectResponseStructure
+    // Test: create account and verify response structure
+    // Expected: Response contains userId, userName, balance
     @Test
     void testCreateAccountReturnsCorrectResponseStructure() throws Exception {
         // Arrange
@@ -164,6 +185,9 @@ class AccountControllerTest {
     }
 
     // test get balance returns correct response structure
+    // mvn test -Dtest=AccountControllerTest#testGetBalanceReturnsCorrectResponseStructure
+    // Test: get balance and verify response structure
+    // Expected: Response contains userId, balance
     @Test
     void testGetBalanceReturnsCorrectResponseStructure() throws Exception {
         // Arrange
