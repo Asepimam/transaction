@@ -11,12 +11,12 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - service_data:/var/lib/postgresql/data
+      - service_data_transaction:/var/lib/postgresql/data
     networks:
       - transaction_net
 
 volumes:
-  service_data:
+  service_data_transaction:
 
 networks:
   transaction_net:
